@@ -27,6 +27,12 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URI")
+
+uri = app.config['SQLALCHEMY_DATABASE_URI']
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
+
 db.init_app(app)
 
 # CREATE TABLE
