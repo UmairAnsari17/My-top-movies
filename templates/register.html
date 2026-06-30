@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<style>
+    body {
+      position: relative;
+      background: url("{{ url_for('static', filename='assets/img/register-bg.jpg') }}")
+                  no-repeat center center / cover;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+
+
+    .nav-link.active {
+      color: white !important;
+      font-weight: 600;
+      border-bottom: 2px solid #0d6efd;
+    }
+
+
+</style>
+
+<!--Showing flash message-->
+<!--<div class="container mt-3">-->
+<!--  {% with messages = get_flashed_messages(with_categories=true) %}-->
+<!--    {% if messages %}-->
+<!--      {% for category, message in messages %}-->
+<!--        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">-->
+<!--          {{ message }}-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
+<!--        </div>-->
+<!--      {% endfor %}-->
+<!--    {% endif %}-->
+<!--  {% endwith %}-->
+<!--</div>-->
+
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height:50vh;">
+
+        <div class="col-md-5">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body p-4">
+
+                    <h2 class="text-center fw-bold mb-2">
+                        Create Account
+                    </h2>
+
+                    <p class="text-center text-muted mb-4">
+                        Register to My Top Movies
+                    </p>
+
+                    <form method="POST">
+
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                name="name"
+                                placeholder="Enter your full name"
+                                required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control form-control-lg"
+                                name="email"
+                                placeholder="Enter your email"
+                                required>
+                        </div>
+
+                        <div class="mb-3 position-relative">
+
+                            <label class="form-label fw-semibold">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control form-control-lg pe-5"
+                                id="passwordField"
+                                name="password"
+                                placeholder="Enter your password"
+                                required>
+
+                            <span
+                                onclick="togglePassword()"
+                                style="
+                                    position:absolute;
+                                    right:18px;
+                                    top:50px;
+                                    cursor:pointer;
+                                    font-size:20px;">
+                                👁️
+                            </span>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success btn-lg w-100">
+
+                            Register
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <div class="text-center">
+
+                        Already have an account?
+
+                        <a href="{{ url_for('login') }}">
+                            Login here
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+function togglePassword() {
+    const password = document.getElementById("passwordField");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
+</script>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+<div class="container">
+    <h5 class="mb-2">🎬 My Top Movies</h5>
+
+    <p class="mb-2">
+        Discover, Rate & Manage Your Favorite Movies.
+    </p>
+
+    <hr class="border-secondary w-50 mx-auto">
+
+    <p class="mb-0">
+        &copy; 2026 My Top Movies. All Rights Reserved.
+    </p>
+
+    <small class="text-secondary">
+        Developed by <strong>Umair Ansari</strong>
+    </small>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

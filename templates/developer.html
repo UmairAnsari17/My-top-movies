@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Developer{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">👨‍💻 Meet the Developer</h1>
+        <p class="lead text-muted">
+            Passionate about building modern web applications with Python and Flask.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body p-5 text-center">
+
+                    <!-- Profile Image -->
+                    <img src="{{ url_for('static', filename='assets/img/profile.jpg') }}"
+                         class="rounded-circle shadow mb-4"
+                         width="180"
+                         height="180"
+                         alt="Developer">
+
+                    <h2 class="fw-bold">Umair Ansari</h2>
+
+                    <h5 class="text-primary mb-4">
+                        Python Developer and Data Analyst
+                    </h5>
+
+                    <p class="text-muted">
+                        Hello! I'm <strong>Umair Ansari</strong>, a passionate Python developer
+                        who enjoys building web applications using Flask.
+                        I love learning new technologies and creating projects
+                        that solve real-world problems while improving my development skills.
+                    </p>
+
+                    <hr>
+
+                    <h4 class="mt-4">🛠 Technical Skills</h4>
+
+                    <div class="mt-3">
+
+                        <span class="badge bg-primary m-1 p-2">Python</span>
+
+                        <span class="badge bg-success m-1 p-2">Flask</span>
+
+                        <span class="badge bg-warning text-dark m-1 p-2">SQLAlchemy</span>
+
+                        <span class="badge bg-danger m-1 p-2">HTML5</span>
+
+                        <span class="badge bg-info text-dark m-1 p-2">CSS3</span>
+
+                        <span class="badge bg-secondary m-1 p-2">Bootstrap 5</span>
+
+                        <span class="badge bg-dark m-1 p-2">JavaScript</span>
+
+                        <span class="badge bg-success m-1 p-2">SQL</span>
+
+                        <span class="badge bg-primary m-1 p-2">Data Analysis</span>
+
+                        <span class="badge bg-warning text-dark m-1 p-2">PowerBI</span>
+
+                        <span class="badge bg-danger m-1 p-2">AI & Machine Learning</span>
+
+                    </div>
+
+                    <hr>
+
+                    <h4 class="mt-4">🎯 About This Project</h4>
+
+                    <p class="text-muted">
+                        <strong>My Top Movies</strong> is a movie management web
+                        application developed using Flask and SQLite. It allows
+                        users to register, log in, search movies,
+                        add them to their personal collection, rate them, and write
+                        reviews in a clean and user-friendly interface.
+                    </p>
+
+                    <hr>
+
+                    <h4 class="mt-4">📬 Connect With Me</h4>
+
+                    <div class="mt-3">
+
+                        <a href="https://github.com/UmairAnsari17"
+                           class="btn btn-dark m-2"
+                           target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+
+                        <a href="https://linkedin.com/in/umair-ansari17"
+                           class="btn btn-primary m-2"
+                           target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+
+                        <a href="mailto:umairansari.py@gmail.com"
+                           class="btn btn-success m-2">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+<div class="container">
+    <h5 class="mb-2">🎬 My Top Movies</h5>
+
+    <p class="mb-2">
+        Discover, Rate & Manage Your Favorite Movies.
+    </p>
+
+    <hr class="border-secondary w-50 mx-auto">
+
+    <p class="mb-0">
+        &copy; 2026 My Top Movies. All Rights Reserved.
+    </p>
+
+    <small class="text-secondary">
+        Developed by <strong>Umair Ansari</strong>
+    </small>
+</div>
+</footer>
+
+{% endblock %}

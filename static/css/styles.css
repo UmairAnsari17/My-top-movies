@@ -1,214 +1,267 @@
-*, *:before, *:after {
-	 box-sizing: border-box;
-}
- html {
-	 font-size: 18px;
-	 line-height: 1.5;
-	 font-weight: 300;
-	 color: #333;
-	 font-family: "Nunito Sans", sans-serif;
-}
- body {
-	 margin: 0;
-	 padding: 0;
-	 height: 100vh;
-	 background-color: #ecf0f9;
-	 background-attachment: fixed;
-}
-.large {
-     font-size: 3rem;
-}
- .content {
-	 display: flex;
-	 margin: 0 auto;
-	 justify-content: center;
-	 align-items: center;
-	 flex-wrap: wrap;
-	 max-width: 1500px;
-}
- p.overview {
-	 font-size: 12px;
-	 height: 200px;
-	 width: 100%;
-	 overflow: hidden;
-	 text-overflow: ellipsis;
-}
- .heading {
-	 width: 100%;
-	 margin-left: 1rem;
-	 font-weight: 900;
-	 font-size: 1.618rem;
-	 text-transform: uppercase;
-	 letter-spacing: 0.1ch;
-	 line-height: 1;
-	 padding-bottom: 0.5em;
-	 margin-bottom: 1rem;
-	 position: relative;
-}
- .heading:after {
-	 display: block;
-	 content: '';
-	 position: absolute;
-	 width: 60px;
-	 height: 4px;
-	 background: linear-gradient(135deg, #1a9be6, #1a57e6);
-	 bottom: 0;
-}
- .description {
-	 width: 100%;
-	 margin-top: 0;
-	 margin-left: 1rem;
-	 margin-bottom: 3rem;
-}
- .card {
-	 color: inherit;
-	 cursor: pointer;
-	 width: calc(33% - 3rem);
-	 min-width: calc(33% - 3rem);
-	 height: 400px;
-	 min-height: 400px;
-	 perspective: 1000px;
-	 margin: 1rem auto;
-	 position: relative;
-}
- @media screen and (max-width: 800px) {
-	 .card {
-		 width: calc(50% - 3rem);
-	}
-}
- @media screen and (max-width: 500px) {
-	 .card {
-		 width: 100%;
-	}
-}
- .front, .back {
-	 display: flex;
-	 border-radius: 6px;
-	 background-position: center;
-	 background-size: cover;
-	 text-align: center;
-	 justify-content: center;
-	 align-items: center;
-	 position: absolute;
-	 height: 100%;
-	 width: 100%;
-	 -webkit-backface-visibility: hidden;
-	 backface-visibility: hidden;
-	 transform-style: preserve-3d;
-	 transition: ease-in-out 600ms;
-}
- .front {
-	 background-size: cover;
-	 padding: 2rem;
-	 font-size: 1.618rem;
-	 font-weight: 600;
-	 color: #fff;
-	 overflow: hidden;
-	 font-family: Poppins, sans-serif;
-}
- .front:before {
-	 position: absolute;
-	 display: block;
-	 content: '';
-	 top: 0;
-	 left: 0;
-	 right: 0;
-	 bottom: 0;
-	 background: linear-gradient(135deg, #1a9be6, #1a57e6);
-	 opacity: 0.25;
-	 z-index: -1;
-}
- .card:hover .front {
-	 transform: rotateY(180deg);
-}
- .card:nth-child(even):hover .front {
-	 transform: rotateY(-180deg);
-}
- .back {
-	 background: #fff;
-	 transform: rotateY(-180deg);
-	 padding: 0 2em;
-}
- .card:hover .back {
-	 transform: rotateY(0deg);
-}
- .card:nth-child(even) .back {
-	 transform: rotateY(180deg);
-}
- .card:nth-child(even):hover .back {
-	 transform: rotateY(0deg);
-}
- .button {
-	 transform: translateZ(40px);
-	 cursor: pointer;
-	 -webkit-backface-visibility: hidden;
-	 backface-visibility: hidden;
-	 font-weight: bold;
-	 color: #fff;
-	 padding: 0.5em 1em;
-	 border-radius: 100px;
-	 font: inherit;
-	 background: linear-gradient(135deg, #1a9be6, #1a57e6);
-	 border: none;
-	 position: relative;
-	 transform-style: preserve-3d;
-	 transition: 300ms ease;
-}
- .button:before {
-	 transition: 300ms ease;
-	 position: absolute;
-	 display: block;
-	 content: '';
-	 transform: translateZ(-40px);
-	 -webkit-backface-visibility: hidden;
-	 backface-visibility: hidden;
-	 height: calc(100% - 20px);
-	 width: calc(100% - 20px);
-	 border-radius: 100px;
-	 left: 10px;
-	 top: 16px;
-	 box-shadow: 0 0 10px 10px rgba(26, 87, 230, 0.25);
-	 background-color: rgba(26, 87, 230, 0.25);
+*, *:before, *:after{
+    box-sizing:border-box;
 }
 
-.button.delete-button {
-	 background-color: rgba(230, 87, 230, 0.25);
-	 background: linear-gradient(135deg, #e61a46, #e61a1a);
+html{
+    font-size:18px;
+    line-height:1.5;
+    font-weight:300;
+    color:#333;
+    font-family:"Nunito Sans",sans-serif;
 }
-.button.delete-button:before {
-	 background-color: rgba(230, 87, 230, 0.25);
-	 box-shadow: 0 0 10px 10px rgba(230, 87, 230, 0.25);
+
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background-color:var(--bs-body-bg);
+    color:var(--bs-body-color);
+    background-attachment:fixed;
 }
- .button:hover {
-	 transform: translateZ(55px);
+
+.large{
+    font-size:3rem;
 }
- .button:hover:before {
-	 transform: translateZ(-55px);
+
+/* ===========================
+   MOVIE CONTAINER
+=========================== */
+
+.content{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    flex-wrap:wrap;
+    gap:20px;
+    max-width:1400px;
+    margin:0 auto;
+    padding:20px;
 }
- .button:active {
-	 transform: translateZ(20px);
+
+.heading{
+    width:100%;
+    margin-left:1rem;
+    font-weight:900;
+    font-size:2rem;
+    text-transform:uppercase;
+    letter-spacing:.08rem;
+    line-height:1.2;
+    padding-bottom:.5rem;
+    margin-bottom:1rem;
+    position:relative;
 }
- .button:active:before {
-	 transform: translateZ(-20px);
-	 top: 12px;
-	 top: 12px;
+
+.heading:after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:70px;
+    height:4px;
+    background:linear-gradient(135deg,#1a9be6,#1a57e6);
 }
-.container.add {
-    margin-top: 40px;
-    margin-bottom: 20px;
+
+.description{
+    width:100%;
+    margin-left:1rem;
+    margin-bottom:2rem;
 }
-.rating {
-    color: #E4BB23;
+
+/* ===========================
+   MOVIE CARD
+=========================== */
+
+.movie-card{
+    color:inherit;
+    cursor:pointer;
+    width:calc(33.333% - 20px);
+    min-width:280px;
+    max-width:350px;
+    height:420px;
+    perspective:1000px;
+    position:relative;
 }
-.review {
-    font-style: italic;
+
+.front,
+.back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    backface-visibility:hidden;
+    transform-style:preserve-3d;
+    transition:transform .6s ease-in-out;
 }
- .movie_gens {
-	 font-size: 11.5px;
+
+.front{
+    padding:2rem;
+    color:#fff;
+    font-size:1.6rem;
+    font-weight:600;
+    font-family:Poppins,sans-serif;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    overflow:hidden;
 }
- .title {
-	 font-weight: bold;
+
+.front:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,#1a9be6,#1a57e6);
+    opacity:.25;
+    z-index:-1;
 }
- .release_date {
-	 font-weight: normal;
+
+.back{
+    background:var(--bs-body-bg);
+    color:var(--bs-body-color);
+    transform:rotateY(-180deg);
+    padding:1.5rem;
+    overflow:auto;
+}
+
+.movie-card:hover .front{
+    transform:rotateY(180deg);
+}
+
+.movie-card:hover .back{
+    transform:rotateY(0);
+}
+
+.movie-card:nth-child(even) .back{
+    transform:rotateY(180deg);
+}
+
+.movie-card:nth-child(even):hover .front{
+    transform:rotateY(-180deg);
+}
+
+.movie-card:nth-child(even):hover .back{
+    transform:rotateY(0);
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+p.overview{
+    font-size:.8rem;
+    height:180px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.rating{
+    color:#E4BB23;
+}
+
+.review{
+    font-style:italic;
+}
+
+.movie_gens{
+    font-size:.75rem;
+}
+
+.title{
+    font-weight:bold;
+}
+
+.release_date{
+    font-weight:normal;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.button{
+    cursor:pointer;
+    color:#fff;
+    padding:.6rem 1.2rem;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#1a9be6,#1a57e6);
+    font-weight:bold;
+    transition:.3s;
+}
+
+.button:hover{
+    transform:translateY(-3px);
+}
+
+.button.delete-button{
+    background:linear-gradient(135deg,#e61a46,#e61a1a);
+}
+
+.container.add{
+    margin:40px auto 20px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:992px){
+
+    .movie-card{
+        width:calc(50% - 20px);
+        min-width:260px;
+    }
+
+}
+
+@media (max-width:768px){
+
+    html{
+        font-size:17px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .movie-card{
+        width:90%;
+        max-width:420px;
+        min-width:auto;
+        height:400px;
+        margin:auto;
+    }
+
+    .heading,
+    .description{
+        text-align:center;
+        margin-left:0;
+    }
+
+}
+
+@media (max-width:576px){
+
+    html{
+        font-size:16px;
+    }
+
+    .movie-card{
+        width:100%;
+        max-width:360px;
+        height:380px;
+    }
+
+    .front{
+        padding:1.2rem;
+        font-size:1.3rem;
+    }
+
+    .back{
+        padding:1rem;
+    }
+
 }
