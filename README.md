@@ -46,4 +46,4 @@ python main.py
 
 **Umair Ansari**
 
-GitHub: https://github.com/UmairAnsari17
+LinkedIn: www.linkedin.com/in/umair-ansari17
