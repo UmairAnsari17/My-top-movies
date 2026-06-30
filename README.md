@@ -1,6 +1,6 @@
 # 🎬 My Top Movies
 
-A Flask web application that allows users to search, save, rate, review, and manage their favorite movies using the TMDb API.
+A Flask web application that allows users to search, save, rate, review, and manage their favorite movies.
 
 ## 🚀 Live Demo
 
