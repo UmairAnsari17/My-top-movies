@@ -221,6 +221,16 @@ def find_movie():
         movie_api_url = f"{MOVIE_DB_INFO_URL}/{movie_api_id}"
         response = requests.get(movie_api_url, params={"api_key": MOVIE_DB_API_KEY, "language": "en-US"})
         data = response.json()
+
+        #Check if this user already added this Movie
+        existing_movie = Movie.query.filter_by(
+            title=data["title"],
+            user_id=current_user.id
+        ).first()
+
+        if existing_movie:
+            flash("⚠️ This movie is already in your collection.", "warning")
+            return redirect(url_for("home"))
         new_movie = Movie(
             title=data["title"],
             year=data["release_date"].split("-")[0],
