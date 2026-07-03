@@ -1,5 +1,5 @@
 import re
-from flask import Flask, render_template, redirect, url_for, request, abort, flash
+from flask import Flask, render_template, redirect, url_for, request, abort, flash, session
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -161,39 +161,11 @@ class FindMovieForm(FlaskForm):
     submit = SubmitField("Add Movie")
 
 
-# new_movie = Movie(
-#     title="Phone Booth",
-#     year=2002,
-#     description="Publicist Stuart Shepard finds himself trapped in a phone booth, pinned down by an extortionist's sniper rifle. Unable to leave or receive outside help, Stuart's negotiation with the caller leads to a jaw-dropping climax.",
-#     rating=7.3,
-#     ranking=10,
-#     review="My favourite character was the caller.",
-#     img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
-# )
-
-
-# second_movie = Movie(
-#     title="Avatar The Way of Water",
-#     year=2022,
-#     description="Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
-#     rating=7.3,
-#     ranking=9,
-#     review="I liked the water.",
-#     img_url="https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
-# )
-#
-# with app.app_context():
-#     db.session.add(new_movie)
-#     db.session.add(second_movie)
-#     db.session.commit()
-
-
-
 @app.route("/")
 @app.route("/index")
 @login_required
 def home():
-    result = db.session.execute(db.select(Movie).where(Movie.user_id == current_user.id).order_by(Movie.rating))
+    result = db.session.execute(db.select(Movie).where(Movie.user_id == current_user.id, Movie.rating.is_not(None)).order_by(Movie.rating))
     all_movies = result.scalars().all() #converts ScalarResult to Python list
 
     for i in range(len(all_movies)):
@@ -231,16 +203,19 @@ def find_movie():
         if existing_movie:
             flash("⚠️ This movie is already in your collection.", "warning")
             return redirect(url_for("home"))
-        new_movie = Movie(
-            title=data["title"],
-            year=data["release_date"].split("-")[0],
-            img_url=f"{MOVIE_DB_IMAGE_URL}{data['poster_path']}",
-            description=data["overview"],
-            user_id=current_user.id
+        session["movie_data"] = {
+            "title": data["title"],
+            "year": int(data["release_date"].split("-")[0]),
+            "img_url": f"{MOVIE_DB_IMAGE_URL}{data['poster_path']}",
+            "description": data["overview"]
+        }
+
+        flash(
+            "⭐ Please rate and review the movie to complete adding it.",
+            "warning"
         )
-        db.session.add(new_movie)
-        db.session.commit()
-        return redirect(url_for('rate_movie', id=new_movie.id))
+
+        return redirect(url_for("rate_movie"))
 
 
 
@@ -248,12 +223,28 @@ def find_movie():
 @login_required
 def rate_movie():
     form = RateMovieForm()
-    movie_id = request.args.get('id')
-    movie = db.get_or_404(Movie, movie_id)
+    movie = session.get("movie_data")
+
+    if not movie:
+        flash("No movie selected.", "danger")
+        return redirect(url_for("home"))
     if form.validate_on_submit():
-        movie.rating = form.rating.data
-        movie.review = form.review.data
+        new_movie = Movie(
+            title=movie["title"],
+            year=movie["year"],
+            img_url=movie["img_url"],
+            description=movie["description"],
+            rating=form.rating.data,
+            review=form.review.data,
+            user_id=current_user.id
+        )
+
+        db.session.add(new_movie)
         db.session.commit()
+
+        session.pop("movie_data", None)
+
+        flash("✅ Movie added successfully!", "success")
         return redirect(url_for('home'))
     return render_template('edit.html', movie=movie, form=form)
 
