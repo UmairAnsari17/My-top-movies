@@ -72,6 +72,10 @@ body{
     box-shadow:0 0 10px rgba(13,110,253,.3);
 }
 
+.alert {
+    transition: opacity 0.5s ease;
+}
+
 /* MOVIE CONTAINER */
 
 .content{
